@@ -4,6 +4,7 @@ import AxiosApi from '../class/axiosApi';
 import './css/login.css';
 
 const Login = () => {
+    const api = new AxiosApi();
     const [form, setForm] = useState({});
     const navigate = useNavigate();
     const handleNavigate = () => {
@@ -18,8 +19,7 @@ const Login = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const api = new AxiosApi();
-        const response = await api.post('/login', JSON.stringify(form));
+        const response = await api.post('/login', form);
         if (response.statusText) {
             localStorage.setItem('token', JSON.stringify(response.data));
             navigate('/');
@@ -44,7 +44,7 @@ const Login = () => {
                             <a className='link-register' onClick={handleNavigate}> sign in</a>
                         </div>
                     </form>
-                    <a href="http://localhost:3030/auth/googleLogin">Login With Google</a>
+                    <a href={`${process.env.REACT_APP_SERVER_URL}/auth/googleLogin`}>Login With Google</a>
                 </div>
             </div>
         </div>

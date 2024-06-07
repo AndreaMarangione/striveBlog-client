@@ -3,6 +3,7 @@ import AxiosApi from '../class/axiosApi';
 import './css/register.css';
 
 const UploadBlog = () => {
+    const api = new AxiosApi();
     const [formdata, setFormdata] = useState({});
     const [authorAvatar, setauthorAvatar] = useState(null);
     const handleForm = (e) => {
@@ -21,15 +22,14 @@ const UploadBlog = () => {
         Object.entries(formdata).forEach(([key, value]) => {
             data.append(key, value);
         })
-        try {
-            const response = await fetch('http://localhost:3030/authors/create', {
-                method: 'POST',
-                body: data
-            })
-            return response.data;
-        } catch (error) {
-            console.log(error.message);
-        }
+        await api.post('/authors/create',
+            data,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
     }
     return (
         <div className="container">

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class AxiosApi {
     constructor() {
-        const baseUrl = 'http://localhost:3030';
+        const baseUrl = `${process.env.REACT_APP_SERVER_URL}`;
         this.axiosInstance = axios.create({
             baseURL: baseUrl,
             headers: {
@@ -10,7 +10,7 @@ class AxiosApi {
             }
         })
         this.axiosInstance.interceptors.request.use((config) => {
-            const token = localStorage.getItem('token');
+            const token = JSON.parse(localStorage.getItem('token'));
             if (token) {
                 config.headers.Authorization = token;
             }

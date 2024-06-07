@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './css/uploadBlog.css';
 import useSession from '../Hooks/useSession';
+import AxiosApi from '../class/axiosApi';
 
 const UploadBlog = () => {
+    const api = new AxiosApi();
     const { session } = useSession();
     const [formdata, setFormdata] = useState({});
     const [blogImage, setBlogImage] = useState(null);
@@ -22,19 +24,14 @@ const UploadBlog = () => {
         Object.entries(formdata).forEach(([key, value]) => {
             data.append(key, value);
         })
-        try {
-            const response = await fetch('http://localhost:3030/blogPost/create', {
-                method: 'POST',
-                body: data,
+        await api.post('/blogPost/create',
+            data,
+            {
                 headers: {
-                    'authorization': session,
+                    'Content-Type': 'multipart/form-data'
                 }
-            })
-            const json = await response.json();
-            return json;
-        } catch (error) {
-            console.log(error.message);
-        }
+            }
+        );
     }
     return (
         <div className="container">
