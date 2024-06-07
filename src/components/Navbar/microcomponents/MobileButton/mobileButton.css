@@ -1,0 +1,11 @@
+.mobile-button {
+    width: 3rem;
+    height: 3rem;
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+}
+
+.mobile-button ion-icon {
+    font-size: 1.5rem;
+}

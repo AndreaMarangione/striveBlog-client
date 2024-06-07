@@ -1,0 +1,18 @@
+.form-style {
+    width: 15rem;
+    height: 2.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .form-style {
+        width: 30rem;
+        height: 2.5rem;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .form-style {
+        width: 50rem;
+        height: 2.5rem;
+    }
+}
